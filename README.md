@@ -55,7 +55,10 @@ This is an example work-flow and configuration to get and build the LLVM source:
      * ``cd build``
 
      * ``cmake -G <generator> [options] ../llvm``
-
+     * 可以直接执行
+      ```shell
+        cmake -G "Unix Makefiles" -DLLC_HOST_CPU=aarch64 -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra;libcxx;libcxxabi;libunwind;lldb;compiler-rt;lld;polly" ../llvm
+      ```
         Some common build system generators are:
 
         * ``Ninja`` --- for generating [Ninja](https://ninja-build.org)
@@ -85,8 +88,14 @@ This is an example work-flow and configuration to get and build the LLVM source:
         * ``-DLLVM_ENABLE_ASSERTIONS=On`` --- Compile with assertion checks enabled
           (default is Yes for Debug builds, No for all other build types).
 
-      * ``cmake --build . [-- [options] <target>]`` or your build system specified above
-        directly.
+      * ``cmake --build . [-- [options] <target>]`` or your build system specified above directly.
+
+      * 或者：
+      ```shell
+        make -j32 
+      ```
+        切记不能 make install， 除非你的根目录够大，>80G
+        
 
         * The default target (i.e. ``ninja`` or ``make``) will build all of LLVM.
 
